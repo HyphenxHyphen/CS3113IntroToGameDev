@@ -9,12 +9,12 @@ Ball (Arcane Ball) will bounce off all walls and paddles
 Ball will stop upon touching the left or right wall, which will end the game
 
 
-Theme is, of course, FANTASY FOOTBALL
-Except, by Fantasy I meant D&D-type fantasy
-And by Football, I meant magic spell (It's actually the projectile attack of an Archmage. He won't miss it, he can make another)
+Theme is, of course, FANTASY FOOTBALL.
+Except, by Fantasy I meant D&D-type fantasy.
+And by Football, I meant magic spell (It's actually the projectile attack of an Archmage. He won't miss it, he can make another).
 Extra balls not included (He ran out of mana)
 
 A winner announcement will appear at the center of the screen
 
-Please wait 2 seconds for the game to load
+Please wait 2 seconds for the game to load.
 The ball speeds up over time
