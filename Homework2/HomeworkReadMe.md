@@ -26,3 +26,5 @@ A winner announcement will appear at the center of the screen
 Please wait 2 seconds for the game to load
 
 The ball speeds up over time
+
+Don't mind that I still haven't renamed the window since Delta-Time
