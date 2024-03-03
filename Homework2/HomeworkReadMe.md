@@ -6,6 +6,7 @@ Control the Goblin with UP DOWN
 Press T to play single-player
 
 Ball (Arcane Ball) will bounce off all walls and paddles
+
 Ball will stop upon touching the left or right wall, which will end the game
 
 
