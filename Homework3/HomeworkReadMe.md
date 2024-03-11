@@ -24,7 +24,7 @@ And now, for the extra features that nobody asked for, and costed me 10% for... 
 There are 3 different targets (coins)!
 There are game modes! That means MAIN_MENU, GAME_LEVEL, and GAME_OVER (no there aren't any mini-games).
 Press any key to start on MAIN_MENU, press any key to reset on GAME_OVER!
-This means that there is a reset feature in the game!
+This means that there is a reset feature in the game! And each reset generates a new map!
 There is also tiling for tiles!
 I could've just handwritten or pre-created the messages, but I didn't, so...
 There is a font-writing system!
