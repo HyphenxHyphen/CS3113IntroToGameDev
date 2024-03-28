@@ -1,4 +1,4 @@
-[MeIRL](https://github.com/HyphenxHyphen/CS3113IntroToGameDev/assets/71054673/3b849164-5fe1-4f78-ac2e-ed7225372714)
+![MeIRL](https://github.com/HyphenxHyphen/CS3113IntroToGameDev/assets/71054673/3b849164-5fe1-4f78-ac2e-ed7225372714)
 
 I'm early this time!!
 
@@ -21,6 +21,9 @@ There are 3 different levels/maps in the game. Map 1 is a bit of a tutorial, Map
 Enemies can be defeated by hitting them with your sword. WASD to move, arrow keys to attack in that direction, space to jump. 
 Space + Right/Left will cause you to jump in that direction. 
 Attacking will cancel movement input.
+
+The camera follows the player at its center, and any text is displayed centered on the camera. You can use the mouse scroll wheel to scroll in and out.
+
 Enemies that are defeated are removed, they don't show up, and they aren't updated, because they're deleted.
 There is a bit of garbage collection tech (marking entities to be deleted, and deleting them as the last step of a frame, and making sure all others dereference the entity)
 
