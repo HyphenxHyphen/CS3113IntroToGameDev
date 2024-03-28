@@ -843,7 +843,7 @@ void Entity::aiVillager(std::vector<GameMap>& levelMaps, float deltaTime)
 				bool x_move = true;
 				glm::vec3 probe = glm::vec3(m_position.x + ((m_scale.x / 2) - (m_collisionSize.x / 2.0f)) + m_velocity.x * deltaTime, m_position.y, m_position.z); // Right
 				for (auto& levelMap : levelMaps) {
-					if (levelMap.isPit() && levelMap.isSolid(probe, &x_overlap, &y_overlap) && (x_overlap > 0) && (y_overlap >= 0)) {
+					if (levelMap.isPit() && levelMap.isSolid(probe, &x_overlap, &y_overlap) && (x_overlap > 0) && (y_overlap >= 0) && (levelMap.m_elevation == m_elevation)) {
 						//std::cout << "Attempting to Move into Solid Tile y, x over: " << x_overlap << ", y over: " << y_overlap << std::endl;
 						if (x_move) {
 							if (m_velocity.x * (probe.x - m_position.x) > 0) {
