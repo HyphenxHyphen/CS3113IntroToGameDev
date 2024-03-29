@@ -208,10 +208,10 @@ void Level::initialize(std::vector<std::vector<GameMap>>& allLevelData) {
 		Util::loadLevelData("Assets/Maps/Level 1/Pits 0_1.png"),
 		Util::loadTexture("Assets/Tiny Swords/Tiny Swords (Update 010)/Terrain/Water/Water.png"), 1.0f, 1, 1, {}));
 	// Pits 1
-	allLevelData[1].push_back(GameMap(false, true, 0.0f, 29, 15,
+	allLevelData[1].push_back(GameMap(false, true, 1.0f, 29, 15,
 		0, {}, 0,
 		Util::loadLevelData("Assets/Maps/Level 1/Pits 1_1.png"),
-		Util::loadTexture("Assets/Tiny Swords/Tiny Swords (Update 010)/Terrain/Water/Water.png"), 1.0f, 1, 1, {}));
+		Util::loadTexture("Assets/Empty.png"), 1.0f, 1, 1, {}));
 	//Tile Edge Foam
 	allLevelData[1].push_back(GameMap(false, false, 0.0f, 29, 15,
 		0,

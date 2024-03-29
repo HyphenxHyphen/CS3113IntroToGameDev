@@ -159,7 +159,7 @@ void Entity::update(std::vector<GameMap>& levelMaps, std::map<std::string, Entit
 							entity->setActionState(STUNNED);
 
 							// Knockback
-							glm::vec3 knockbackForce = { 
+							glm::vec3 knockbackForce = {
 								fabs(m_position.x - entity->getPosition().x),
 								fabs(m_position.y - entity->getPosition().y),
 								0.0f };
@@ -190,7 +190,7 @@ void Entity::update(std::vector<GameMap>& levelMaps, std::map<std::string, Entit
 								-knockbackForce.y,
 								0.0f));
 						}
-						
+
 
 					}
 				}
@@ -233,11 +233,23 @@ void Entity::update(std::vector<GameMap>& levelMaps, std::map<std::string, Entit
 	}
 
 	// Check Movement Collision
-	if ((m_actionState != FALLING) && (m_actionState != JUMPING)) {
+
+	if ((m_actionState != FALLING) && (m_actionState != JUMPING) && (m_actionState != STUNNED)) {
 		for (auto& levelMap : levelMaps) {
 			if (levelMap.getCollidable()) {
 				willCollide(&levelMap, levelMap.isPit(), deltaTime);
 			}
+			if ((levelMap.isPit()) && (levelMap.m_elevation == m_elevation)) {
+				if (levelMap.isPit(m_position)) {
+					fall(-m_elevation);
+				}
+			}
+		}
+	}
+
+	if ((m_actionState != FALLING) && (m_actionState != JUMPING) && (m_actionState != STUNNED)) {
+		if (m_health <= 0) {
+			diesOfCringe(allEffects, deltaTime);
 		}
 	}
 
@@ -261,15 +273,13 @@ void Entity::update(std::vector<GameMap>& levelMaps, std::map<std::string, Entit
 			}
 
 			if (overPit) {
-				if (m_actionState == FALLING) {
+				if (m_elevation <= 0) {
 					//std::cout << m_objectID << " is over Pit " << std::endl;
-
-					m_elevation = 0.0f;
 					diesOfCringe(allEffects, deltaTime);
 				}
-				else if (m_actionState == JUMPING) {
+				else {
 					//std::cout << m_objectID << " Jump land on Pit " << std::endl;
-					fall();
+					fall(-m_elevation);
 				}
 			}
 			else {
@@ -283,20 +293,6 @@ void Entity::update(std::vector<GameMap>& levelMaps, std::map<std::string, Entit
 		}
 		else {
 			m_elevation += (m_velocity.y * deltaTime * m_moveSpeed);
-		}
-	}
-
-	if ((m_actionState != FALLING) && (m_actionState != JUMPING) && (m_actionState != STUNNED)) {
-		for (auto& levelMap : levelMaps) {
-			if (levelMap.getCollidable() && levelMap.isPit()) {
-				if (levelMap.isPit(m_position)) {
-					fall();
-				}
-			}
-		}
-
-		if (m_health <= 0) {
-			diesOfCringe(allEffects, deltaTime);
 		}
 	}
 
@@ -492,7 +488,7 @@ void Entity::willCollide(GameMap* gameMap, bool pit, float deltaTime) {
 	}
 }
 
-void Entity::fall() {
+void Entity::fall(float elevationTarget) {
 	//std::cout << "------ fall called ------" << m_isAlive <<  std::endl;
 	m_actionState = FALLING;
 	setAnimActive(1);
@@ -501,7 +497,7 @@ void Entity::fall() {
 	m_acceleration.x = 0.0f;
 	m_acceleration.y = -2.0f;
 	m_fallTarget = m_position;
-	m_fallTarget.y -= m_elevation;
+	m_fallTarget.y += elevationTarget;
 }
 
 
@@ -741,8 +737,9 @@ void Entity::aiVillager(std::vector<GameMap>& levelMaps, float deltaTime)
 				m_position.x + (rand() % 3) * (((rand() % 100) <= 50) ? 1.0f : -1.0f),
 				m_position.y + (rand() % 3) * (((rand() % 100) <= 50) ? 1.0f : -1.0f),
 				0.0f };
+				/*
 				for (auto& levelMap : levelMaps) {
-					if (levelMap.getCollidable() && levelMap.isPit()) {
+					if ((levelMap.getCollidable() && levelMap.isPit()) && (levelMap.m_elevation == m_elevation)) {
 						if (levelMap.isPit(m_wanderTarget)) {
 							m_wanderTarget = {
 							m_position.x + (rand() % 3) * (((rand() % 100) <= 50) ? 1.0f : -1.0f),
@@ -751,6 +748,7 @@ void Entity::aiVillager(std::vector<GameMap>& levelMaps, float deltaTime)
 						}
 					}
 				}
+				*/
 			}
 		}
 
@@ -806,7 +804,7 @@ void Entity::aiVillager(std::vector<GameMap>& levelMaps, float deltaTime)
 					m_target->setActionState(STUNNED);
 					//std::cout << m_target->m_objectID << " is now " << m_target->m_actionState << std::endl;
 					m_target->setAnimActive(1);
-					m_target->m_elevation = m_elevation += 0.25;
+					m_target->m_elevation = m_elevation + 0.25;
 
 
 					m_target->m_carrier = this;
@@ -837,32 +835,19 @@ void Entity::aiVillager(std::vector<GameMap>& levelMaps, float deltaTime)
 					m_velocity = glm::normalize(m_velocity);
 				}
 
-
-				float x_overlap = 0.0f;
-				float y_overlap = 0.0f;
 				bool x_move = true;
 				glm::vec3 probe = glm::vec3(m_position.x + ((m_scale.x / 2) - (m_collisionSize.x / 2.0f)) + m_velocity.x * deltaTime, m_position.y, m_position.z); // Right
 				for (auto& levelMap : levelMaps) {
-					if (levelMap.isPit() && levelMap.isSolid(probe, &x_overlap, &y_overlap) && (x_overlap > 0) && (y_overlap >= 0) && (levelMap.m_elevation == m_elevation)) {
-						//std::cout << "Attempting to Move into Solid Tile y, x over: " << x_overlap << ", y over: " << y_overlap << std::endl;
+					if ((levelMap.m_elevation == m_elevation) && levelMap.isPit() && levelMap.isPit(probe)) {
+						std::cout << "Attempting to Move into Solid Tile y" << std::endl;
 						if (x_move) {
-							if (m_velocity.x * (probe.x - m_position.x) > 0) {
-								jump();
-								//std::cout << "Attempting to Move into Solid Tile y, x over: " << x_overlap << ", y over: " << y_overlap << std::endl;
-								/*
-								if ((m_actionState != STUNNED) || !levelMap.isPit()) {
-									m_position.y += (m_velocity.y * deltaTime) - (y_overlap * ((m_velocity.y > 0) ? 1.0f : -1.0f));
-									m_velocity.y = 0;
-								}
-								*/
-							}
+							jump();
 							x_move = false;
 						}
 					}
 				}
 			}
 			else {
-
 				m_velocity = { 0.0f, 0.0f, 0.0f };
 				m_actionState = IDLE;
 				setAnimActive(0);
@@ -885,6 +870,8 @@ void Entity::aiVillager(std::vector<GameMap>& levelMaps, float deltaTime)
 			if (m_target->m_actionState == STUNNED) {
 				if (m_target->m_carrier == this) {
 					m_target->setActionState(IDLE);
+					m_target->m_carrier = nullptr;
+					m_target->fall(-0.25);
 				}
 			}
 		}

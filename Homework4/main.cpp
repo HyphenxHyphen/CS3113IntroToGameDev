@@ -42,6 +42,7 @@ struct GameState {
 	std::map<std::string, Entity*> allEnemies = {};
 	std::map<std::string, Entity*> allRed = {};
 	std::map<std::string, Entity*> allPlayers = {};
+	std::vector<std::string> entitiesGarbageCollection = {};
 	std::vector<Effect> allEffects = {};
 	float gameEndTimer = 0.0f;
 	glm::vec3 cameraPos = {0.0f, 0.0f, 0.0f};
@@ -180,6 +181,7 @@ void resetGame() {
 	g_gameState.allPlayers.clear();
 	g_gameState.allEnemies.clear();
 	g_gameState.allRed.clear();
+	
 	srand(time(NULL)); // Reset Random
 
 	// Initialize Objects (models and assets)
@@ -789,10 +791,9 @@ void update() {
 	}
 
 	// Clean up entities
-	std::vector<std::string> entitiesGarbageCollection = {};
 	for (auto& entityPair : g_gameState.allEntities) {
 		if (!entityPair.second.m_isAlive) {
-			entitiesGarbageCollection.push_back(entityPair.first);
+			g_gameState.entitiesGarbageCollection.push_back(entityPair.first);
 			if (g_gameState.allPlayers.count(entityPair.first)) {
 				g_gameState.allPlayers.erase(entityPair.first);
 			}
@@ -812,11 +813,14 @@ void update() {
 			}
 		}
 	}
-	for (auto& entityKey : entitiesGarbageCollection) {
+
+	/*
+	for (auto& entityKey : g_gameState.entitiesGarbageCollection) {
 		//std::cout << "Ready to Clean " << entityKey << g_gameState.allEntities.count(entityKey) << std::endl;
 		g_gameState.allEntities.erase(entityKey);
 		//std::cout << "Cleaned " << entityKey << g_gameState.allEntities.count(entityKey) << std::endl;
 	}
+	*/
 
 	// Fixed Update Below
 	if (g_deltaTime < FIXED_TIMESTEP)
@@ -824,6 +828,9 @@ void update() {
 		g_timeAccumulator = g_deltaTime;
 		return;
 	}
+
+	//std::cout << "Lag:" << g_deltaTime << std::endl;
+
 
 	while (g_deltaTime >= FIXED_TIMESTEP)
 	{
@@ -867,6 +874,7 @@ void updateGameLevel() {
 				npc.insert(g_gameState.allRed.begin(), g_gameState.allRed.end());
 				npc.insert(g_gameState.allEnemies.begin(), g_gameState.allEnemies.end());
 				entityPair.second.update(g_gameState.allLevelData[g_gameState.currentLevelIndex], g_gameState.allRed, g_gameState.allEnemies, npc, &g_gameState.allEffects, FIXED_TIMESTEP);
+				//std::cout << "Player state " << g_gameState.allEntities["Player"].m_actionState << std::endl;
 			}
 			else {
 				entityPair.second.update(g_gameState.allLevelData[g_gameState.currentLevelIndex], g_gameState.allRed, g_gameState.allPlayers, g_gameState.allPlayers, &g_gameState.allEffects, FIXED_TIMESTEP);
@@ -968,7 +976,9 @@ void render() {
 		sortedRenderable.push_back(&map);
 	}
 	for (auto& entity : sortedEntities) {
-		sortedRenderable.push_back(entity);
+		if (entity->m_isAlive) {
+			sortedRenderable.push_back(entity);
+		}
 	}
 	for (auto& effect : g_gameState.allEffects) {
 		sortedRenderable.push_back(&effect);
@@ -980,10 +990,11 @@ void render() {
 			j--;
 		}
 	}
+
+	// Finally, render everything sorted
 	for (auto& renderable : sortedRenderable) {
 		renderable->render(&g_program);
 	}
-
 
 	if (g_gameState.gameMode == MAIN_MENU) {
 		Util::drawText(g_program, "KILL ALL ENEMIES", glm::vec3(-((16.0f - 1) / 2.0f * 0.25f), 0.5f, 0.0f) + g_gameState.cameraPos, g_gameState.font.m_animCols, g_gameState.font.m_animRows, g_gameState.font.m_textureID);

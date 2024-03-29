@@ -87,7 +87,7 @@ public:
 	void checkCollision(std::map<std::string, Entity*>& allEntities);
 	void checkCollision(GameMap* gameMap);
 	void willCollide(GameMap* gameMap, bool pit, float deltaTime);
-	void fall();
+	void fall(float elevationTarget);
 	void checkColliding(std::map<std::string, Entity*>& allEntities);
 	void cleanCollidingWith();
 	bool isCollidingWith(const Entity* entity);
