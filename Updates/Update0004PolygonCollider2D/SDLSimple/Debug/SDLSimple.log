@@ -1,0 +1,4 @@
+﻿  PolygonCollider2D.cpp
+C:\Users\Yes\source\repos\SDLSimple\SDLSimple\PolygonCollider2D.cpp(127,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Yes\source\repos\SDLSimple\SDLSimple\PolygonCollider2D.cpp(127,20): warning C4018: C:\Users\Yes\source\repos\SDLSimple\SDLSimple\PolygonCollider2D.cpp(52) : warning C4715: 'PolygonCollider2D::isCollidingWith': not all control paths return a value
+  SDLSimple.vcxproj -> C:\Users\Yes\source\repos\SDLSimple\Debug\SDLSimple.exe
