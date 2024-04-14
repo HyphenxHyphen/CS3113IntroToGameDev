@@ -1,0 +1,25 @@
+﻿  Scene.cpp
+C:\Users\Yes\source\repos\SDLSimple\SDLSimple\Scene.h(50,31): warning C4244:  'initializing': conversion from 'float' to 'const int', possible loss of data
+  Scene1.cpp
+C:\Users\Yes\source\repos\SDLSimple\SDLSimple\Scene.h(51,32): warning C4244:  'initializing': conversion from 'float' to 'const int', possible loss of data
+C:\Users\Yes\source\repos\SDLSimple\SDLSimple\Scene.h(50,31): warning C4244:  'initializing': conversion from 'float' to 'const int', possible loss of data
+C:\Users\Yes\source\repos\SDLSimple\SDLSimple\Scene.h(51,32): warning C4244:  'initializing': conversion from 'float' to 'const int', possible loss of data
+C:\Users\Yes\source\repos\SDLSimple\SDLSimple\Scene1.cpp(12,12): warning C4244:  'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  TileMap.cpp
+C:\Users\Yes\source\repos\SDLSimple\SDLSimple\Scene1.cpp(127,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Yes\source\repos\SDLSimple\SDLSimple\TileMap.cpp(286,12): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Yes\source\repos\SDLSimple\SDLSimple\TileMap.cpp(287,12): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Yes\source\repos\SDLSimple\SDLSimple\TileMap.cpp(310,12): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Yes\source\repos\SDLSimple\SDLSimple\TileMap.cpp(311,12): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Yes\source\repos\SDLSimple\SDLSimple\TileMap.cpp(315,20): warning C4244:  '=': conversion from 'int' to 'T', possible loss of data
+C:\Users\Yes\source\repos\SDLSimple\SDLSimple\TileMap.cpp(315,20): warning C4244:         with
+C:\Users\Yes\source\repos\SDLSimple\SDLSimple\TileMap.cpp(315,20): warning C4244:         [
+C:\Users\Yes\source\repos\SDLSimple\SDLSimple\TileMap.cpp(315,20): warning C4244:             T=float
+C:\Users\Yes\source\repos\SDLSimple\SDLSimple\TileMap.cpp(315,20): warning C4244:         ]
+  Generating Code...
+C:\Users\Yes\source\repos\SDLSimple\SDLSimple\TileMap.cpp(316,20): warning C4244:  '=': conversion from 'int' to 'T', possible loss of data
+C:\Users\Yes\source\repos\SDLSimple\SDLSimple\TileMap.cpp(316,20): warning C4244:         with
+C:\Users\Yes\source\repos\SDLSimple\SDLSimple\TileMap.cpp(316,20): warning C4244:         [
+C:\Users\Yes\source\repos\SDLSimple\SDLSimple\TileMap.cpp(316,20): warning C4244:             T=float
+C:\Users\Yes\source\repos\SDLSimple\SDLSimple\TileMap.cpp(316,20): warning C4244:         ]
+  SDLSimple.vcxproj -> C:\Users\Yes\source\repos\SDLSimple\Debug\SDLSimple.exe
