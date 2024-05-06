@@ -351,6 +351,13 @@ void Scene1::processInputGameLevel(bool* gameIsRunning) {
 					if (!hovered) {
 						hovered = button->isHovered();
 						if (hovered) {
+							if (g_gameGlobal->g_sfx.count("button")) {
+								Mix_PlayChannel(
+									-1,       // using the first channel that is not currently in use...
+									g_gameGlobal->g_sfx["button"],  // ...play this chunk of audio...
+									0        // ...once.
+								);
+							}
 							button->press();
 						}
 					}

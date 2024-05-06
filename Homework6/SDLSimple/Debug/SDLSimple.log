@@ -1,7 +1,5 @@
-﻿  Scene2.cpp
+﻿  main.cpp
 C:\Users\Yes\source\repos\SDLSimple\SDLSimple\SlicedImageRenderer.h(44,74): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\Yes\source\repos\SDLSimple\SDLSimple\Scene2.cpp(238,34): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\Yes\source\repos\SDLSimple\SDLSimple\Scene2.cpp(242,20): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\Yes\source\repos\SDLSimple\SDLSimple\Scene2.cpp(295,20): warning C4018:  '<': signed/unsigned mismatch
-C:\Users\Yes\source\repos\SDLSimple\SDLSimple\Scene2.cpp(299,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\Yes\source\repos\SDLSimple\SDLSimple\main.cpp(138,53): warning C4244:  'argument': conversion from 'const float' to 'GLsizei', possible loss of data
+C:\Users\Yes\source\repos\SDLSimple\SDLSimple\main.cpp(138,37): warning C4244:  'argument': conversion from 'const float' to 'GLsizei', possible loss of data
   SDLSimple.vcxproj -> C:\Users\Yes\source\repos\SDLSimple\Debug\SDLSimple.exe

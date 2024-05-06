@@ -123,7 +123,7 @@ void switchScene(int sceneInd ) {
 void initialize()
 {
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
-	g_displayWindow = SDL_CreateWindow("Project Go!",
+	g_displayWindow = SDL_CreateWindow("Project Six!",
 		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		(int)WINDOW_WIDTH, (int)WINDOW_HEIGHT,
 		SDL_WINDOW_OPENGL);
@@ -163,9 +163,9 @@ void initialize()
 		AUDIO_CHAN_AMT,      // number of channels (1 is mono, 2 is stereo, etc).
 		AUDIO_BUFF_SIZE      // audio buffer size in sample FRAMES (total samples divided by channel count)
 	);
-	//g_music = Mix_LoadMUS("Assets/Audio/Dungeon1Looped.mp3");
-	//Mix_PlayMusic(g_music, -1);
-	//Mix_VolumeMusic(MIX_MAX_VOLUME * 25/100);
+	g_music = Mix_LoadMUS("Assets/Audio/Forest.mp3");
+	Mix_PlayMusic(g_music, -1);
+	Mix_VolumeMusic(MIX_MAX_VOLUME * 25/100);
 
 	// Initialize Game State
 
@@ -173,12 +173,13 @@ void initialize()
 
 	g_gameGlobal = GameGlobal();
 
-	g_gameGlobal.g_sfx["jump"] = Mix_LoadWAV("Assets/Audio/JumpSFX.wav");
+	g_gameGlobal.g_sfx["button"] = Mix_LoadWAV("Assets/Audio/ButtonSFX.wav");
 	Mix_VolumeChunk(
-		g_gameGlobal.g_sfx["jump"],
+		g_gameGlobal.g_sfx["button"],
 		MIX_MAX_VOLUME * 50 / 100 
 	);
 
+	/*
 	g_gameGlobal.g_sfx["atk"] = Mix_LoadWAV("Assets/Audio/AtkSFX.wav");
 	Mix_VolumeChunk(
 		g_gameGlobal.g_sfx["atk"],
@@ -196,6 +197,7 @@ void initialize()
 		g_gameGlobal.g_sfx["die"],
 		MIX_MAX_VOLUME * 50 / 100
 	);
+	*/
 
 	g_gameScenes.push_back(new Scene0(&g_gameGlobal));
 	g_gameScenes.push_back(new Scene1(&g_gameGlobal));
