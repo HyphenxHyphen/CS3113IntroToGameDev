@@ -27,7 +27,7 @@ Requirements:
 - There's a screen transition of fade-in, fade-out
 - The text color changing on `scene0` upon being hovered is a logic-based shader effect (it really is as simple as I like)
 
-Okay, with that out of the way, there's not really much to talk about for this final project! For the showcase and technical details, watch the video!
+Okay, with that out of the way, there's not really much to talk about for this final project! For the showcase and technical details, watch the video! (Video sent via Slack because GitHub didn't like that my video was LARGE)
 
 I have a good system in place to add in more units and more moves easily, so I plan on doing that once I have some time. 
 If you check the assets folder, there are some ants that were drawn (thank you Sel, once again), and the plan is for each bug to eventually have full designs and sprites.
